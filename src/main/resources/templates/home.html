@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    .container {
+        display: flex;
+     justify-content: center;
+    }
+    #prato {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+
+
+}
+    </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Cardapio</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col">
+        <div id="prato" class="card" style="width: 40rem;" th:each="prato : ${listaPratosDTO}">
+            <img class="card-img-top" th:src="${prato.imagem}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${prato.nomePrato}" >Card title</h5>
+                <p class="card-text" th:text="${prato.descricao}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="${prato.nomePrato}" >Cras justo odio</li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
