@@ -22,7 +22,7 @@ public class Prato {
     private BigDecimal valor;
     private String descricao;
     @Lob
-    @Column(name = "imagem", columnDefinition="BLOB")
+    @Column(name = "imagem", columnDefinition="longblob")
     private byte[] imagem;
 
     public String getNomePrato() {

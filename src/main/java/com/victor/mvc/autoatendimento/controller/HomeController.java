@@ -22,18 +22,6 @@ public class HomeController {
     public String home(Model model){
             List<Prato> listaPratos = pratoRepository.findAll();
 
-        try {
-            BufferedImage bImage = ImageIO.read(new File("/home/victor/Downloads/picanha.jpg"));
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, "jpg", bos );
-            byte [] bytes = bos.toByteArray();
-            for(Prato prato:listaPratos){
-                prato.setImagem(bytes);
-            }
-        }catch (Exception e){
-            System.out.println("Houve um erro");
-        }
-
         List<PratoDto> listaPratosDTO = PratoDto.retornaDTO(listaPratos);
         model.addAttribute("listaPratosDTO",listaPratosDTO);
 
