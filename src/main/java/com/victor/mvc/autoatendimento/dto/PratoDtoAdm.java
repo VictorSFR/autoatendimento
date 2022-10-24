@@ -7,13 +7,15 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PratoDto {
+public class PratoDtoAdm {
+    private Long id;
     private String nomePrato;
     private BigDecimal valor;
     private String descricao;
     private String imagem;
 
-    public PratoDto(Prato prato) {
+    public PratoDtoAdm(Prato prato) {
+        this.id = prato.getId();
         this.nomePrato = prato.getNomePrato();
         this.descricao = prato.getDescricao();
         this.valor = prato.getValor();
@@ -25,8 +27,8 @@ public class PratoDto {
         return "data:image/png;base64," + Base64.getEncoder().encodeToString(byteStream);
     }
 
-    public static List<PratoDto> retornaListaDTO(List<Prato> listaPratos) {
-        Stream<PratoDto> pratoDtoStream = listaPratos.stream().map(PratoDto::new);
+    public static List<PratoDtoAdm> retornaListaDTO(List<Prato> listaPratos) {
+        Stream<PratoDtoAdm> pratoDtoStream = listaPratos.stream().map(PratoDtoAdm::new);
         return pratoDtoStream.toList();
     }
 
@@ -61,5 +63,13 @@ public class PratoDto {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

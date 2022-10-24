@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class RequisicaoSalvarPrato {
     @NotBlank
@@ -20,7 +19,7 @@ public class RequisicaoSalvarPrato {
     private String valorPrato;
     @NotBlank
     private String descricaoPrato;
-
+    //TODO Realizar bean validation imagem prato
     private MultipartFile imagemPrato;
 
     public String getNomePrato() {
@@ -60,32 +59,32 @@ public class RequisicaoSalvarPrato {
         prato.setNomePrato(this.nomePrato);
         prato.setDescricao(this.descricaoPrato);
         prato.setValor(BigDecimal.valueOf(Double.valueOf(this.valorPrato)));
-        try{
+        try {
 
             File file = new File(toFile(imagemPrato).getFileName().toString());
             BufferedImage bImage = ImageIO.read(file);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, "jpg", bos );
-            byte [] bytes = bos.toByteArray();
+            ImageIO.write(bImage, "jpg", bos);
+            byte[] bytes = bos.toByteArray();
             prato.setImagem(bytes);
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return  prato;
+        return prato;
     }
 
-    private Path toFile(MultipartFile file){
+    private Path toFile(MultipartFile file) {
         Path newFile = Paths.get(file.getOriginalFilename());
-        try(InputStream is = file.getInputStream();
-            OutputStream os = Files.newOutputStream(newFile)) {
+        try (InputStream is = file.getInputStream();
+             OutputStream os = Files.newOutputStream(newFile)) {
             byte[] buffer = new byte[4096];
             int read = 0;
 
-            while((read = is.read(buffer)) > 0) {
-                os.write(buffer,0,read);
+            while ((read = is.read(buffer)) > 0) {
+                os.write(buffer, 0, read);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return newFile;

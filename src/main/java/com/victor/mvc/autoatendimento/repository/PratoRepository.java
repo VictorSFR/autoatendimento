@@ -7,7 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PratoRepository extends JpaRepository<Prato,Long> {
+public interface PratoRepository extends JpaRepository<Prato, Long> {
 
-    public List<Prato> findAll();
+     List<Prato> findAll();
+
+     Prato findByNomePrato(String nomePrato);
+     Prato deleteByNomePrato(String nomePrato);
+     Prato deleteById(long id);
+
 }

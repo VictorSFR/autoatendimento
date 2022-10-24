@@ -7,7 +7,8 @@ import java.math.BigDecimal;
 
 @Entity
 public class Prato {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -22,7 +23,7 @@ public class Prato {
     private BigDecimal valor;
     private String descricao;
     @Lob
-    @Column(name = "imagem", columnDefinition="longblob")
+    @Column(name = "imagem", columnDefinition = "longblob")
     private byte[] imagem;
 
     public String getNomePrato() {
