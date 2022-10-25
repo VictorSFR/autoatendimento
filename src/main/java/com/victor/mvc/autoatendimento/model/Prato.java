@@ -3,6 +3,7 @@ package com.victor.mvc.autoatendimento.model;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @Entity
@@ -22,6 +23,7 @@ public class Prato {
     private String nomePrato;
     private BigDecimal valor;
     private String descricao;
+    
     @Lob
     @Column(name = "imagem", columnDefinition = "longblob")
     private byte[] imagem;

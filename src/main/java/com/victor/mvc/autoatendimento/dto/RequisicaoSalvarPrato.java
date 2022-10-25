@@ -20,6 +20,7 @@ public class RequisicaoSalvarPrato {
     @NotBlank
     private String descricaoPrato;
     //TODO Realizar bean validation imagem prato
+
     private MultipartFile imagemPrato;
 
     public String getNomePrato() {

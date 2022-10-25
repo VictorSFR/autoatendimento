@@ -1,8 +1,6 @@
 package com.victor.mvc.autoatendimento.controller;
 
-import com.victor.mvc.autoatendimento.dto.PratoDto;
-import com.victor.mvc.autoatendimento.dto.PratoDtoAdm;
-import com.victor.mvc.autoatendimento.dto.RequisicaoSalvarPrato;
+import com.victor.mvc.autoatendimento.dto.*;
 import com.victor.mvc.autoatendimento.model.Prato;
 import com.victor.mvc.autoatendimento.repository.PratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +38,31 @@ public class PratoController {
         return "prato/listagempratos";
     }
     //TODO refatorar método, deletar por ID
-    @GetMapping("/deletar")
-    public String deletarPrato(@RequestParam Long id){
-        System.out.println("Recebi uma requisição para deletar um prato.");
+    @PostMapping("editar")
+    public String editarPrato(RequisicaoEditarPrato requisicaoEditarPrato, Model model){
+        System.out.println("Recebi uma requisição para editar um prato.");
+        System.out.println(requisicaoEditarPrato.getNomePrato());
+        return "prato/editarprato";
+    }
+    @PostMapping("editarprato")
+    public String atualizarPrato(RequisicaoSalvarPrato requisicaoSalvarPratoPrato, Model model){
+        System.out.println("Recebi uma requisição para atualizar um prato.");
+        Prato pratoRecebido = requisicaoSalvarPratoPrato.toPrato();
+        Prato pratoDb = pratoRepository.findByNomePrato(requisicaoSalvarPratoPrato.getNomePrato());
+        pratoDb.setNomePrato(pratoRecebido.getNomePrato());
+        pratoDb.setDescricao(pratoRecebido.getDescricao());
+        pratoDb.setValor(pratoRecebido.getValor());
+        pratoDb.setImagem(pratoRecebido.getImagem());
+        pratoRepository.save(pratoDb);
 
-        /*Prato prato = pratoRepository.findByNomePrato(nomePrato);
-        System.out.println(prato.getNomePrato());*/
-        pratoRepository.deleteById(id);
+        return "redirect:/pratos/listagem";
+    }
+
+    @PostMapping("deletar")
+    public String deletarPrato(RequisicaoDeletarPrato requisicaoDeletarPrato){
+        System.out.println("Recebi uma requisição para deletar um prato.");
+        System.out.println("Recebi um ID: "+requisicaoDeletarPrato.getId().toString());
+        pratoRepository.deleteById(requisicaoDeletarPrato.getId());
 
         return ("redirect:/pratos/listagem");
     }
@@ -62,13 +78,12 @@ public class PratoController {
             return "prato/novoprato";
         }
 
+
         Prato prato = requisicaoSalvarPrato.toPrato();
 
         pratoRepository.save(prato);
         return "redirect:/pratos/listagem";
     }
-    //TODO método para editarPrato
-    //TODO método para excluirPrato
-    //TODO método para listarPrato
+
 
 }

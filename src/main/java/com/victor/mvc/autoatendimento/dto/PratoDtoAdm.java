@@ -14,6 +14,7 @@ public class PratoDtoAdm {
     private String descricao;
     private String imagem;
 
+
     public PratoDtoAdm(Prato prato) {
         this.id = prato.getId();
         this.nomePrato = prato.getNomePrato();

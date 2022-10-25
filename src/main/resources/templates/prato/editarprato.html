@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -17,7 +16,7 @@
     }
 
     </style>
-    <title>Novo Prato</title>
+    <title>Editar Prato</title>
 </head>
 <body>
 <div class="logo-container mb-3 p-3 d-flex justify-content-between">
@@ -26,10 +25,10 @@
 </div>
 <div class="container">
     <div class="jumbotron mb-0">
-        <h1 class="display-4">Novo Prato</h1>
+        <h1 class="display-4">Editar Prato</h1>
     </div>
     <div class="card mt-3">
-        <form th:object="${requisicaoSalvarPrato}" class="card-body" action="/pratos/salvarprato" method="post"
+        <form th:object="${requisicaoEditarPrato}" class="card-body" action="/pratos/editarprato" method="post"
               enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nomePrato">Nome do prato</label>
