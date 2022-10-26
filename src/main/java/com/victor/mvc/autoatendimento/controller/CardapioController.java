@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.victor.mvc.autoatendimento.dto.PratoDto;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.victor.mvc.autoatendimento.dto.PratoDtoClient;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class CardapioController {
     public String cardapio(Model model) {
         List<Prato> listaPratos = pratoRepository.findAll();
 
-        List<PratoDto> listaPratosDTO = PratoDto.retornaListaDTO(listaPratos);
+        List<PratoDtoClient> listaPratosDTO = PratoDtoClient.retornaListaDTO(listaPratos);
         model.addAttribute("listaPratosDTO", listaPratosDTO);
 
 
@@ -28,12 +27,12 @@ public class CardapioController {
 
     }
 
-    //TODO método para criar um novo pedido
+
     @GetMapping(value = "/cardapio/novopedido")
     public String novoPedido(String nomePrato, Model model) {
         Prato prato = pratoRepository.findByNomePrato(nomePrato);
-        PratoDto pratoDto = new PratoDto(prato);
-        model.addAttribute("prato", pratoDto);
+        PratoDtoClient pratoDtoClient = new PratoDtoClient(prato);
+        model.addAttribute("prato", pratoDtoClient);
 
         return "cardapio/novopedido";
     }

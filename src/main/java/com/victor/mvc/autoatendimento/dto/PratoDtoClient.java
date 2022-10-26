@@ -7,13 +7,13 @@ import java.util.Base64;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class PratoDto {
+public class PratoDtoClient {
     private String nomePrato;
     private BigDecimal valor;
     private String descricao;
     private String imagem;
 
-    public PratoDto(Prato prato) {
+    public PratoDtoClient(Prato prato) {
         this.nomePrato = prato.getNomePrato();
         this.descricao = prato.getDescricao();
         this.valor = prato.getValor();
@@ -25,8 +25,8 @@ public class PratoDto {
         return "data:image/png;base64," + Base64.getEncoder().encodeToString(byteStream);
     }
 
-    public static List<PratoDto> retornaListaDTO(List<Prato> listaPratos) {
-        Stream<PratoDto> pratoDtoStream = listaPratos.stream().map(PratoDto::new);
+    public static List<PratoDtoClient> retornaListaDTO(List<Prato> listaPratos) {
+        Stream<PratoDtoClient> pratoDtoStream = listaPratos.stream().map(PratoDtoClient::new);
         return pratoDtoStream.toList();
     }
 

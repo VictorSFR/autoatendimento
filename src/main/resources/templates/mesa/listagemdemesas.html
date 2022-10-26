@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+         .logo-container {
+        background-color: #db6b3b;
+        color: #FFF;
+    }
+    .logo {
+        font-family: 'Handlee', cursive;
+        font-size: 2.5rem;
+    }
+
+    </style>
+    <title>Listagem Mesas</title>
+</head>
+<body>
+<div class="logo-container mb-3 p-3 d-flex justify-content-between">
+    <span class="logo">Cardapyo</span>
+    <span class="mt-3">login</span>
+</div>
+<div class="container">
+
+    <div class="row">
+        <div th:each="mesa : ${listaMesas}" id="mesa" class="card mb-3" style="width: 18rem;">
+
+            <img class="card-img-top" th:src="${mesa.qrcode}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${mesa.id}">Card title</h5>
+
+            </div>
+
+
+
+
+            <form th:id="'deletar' + ${mesa.id}" method="post" action="/mesas/deletar" th:object="${Mesa}">
+                <input type="hidden"  name="id" th:value="${mesa.id}">
+            </form>
+            <button th:form="'deletar' + ${mesa.id}" type="submit" class="btn btn-danger">Deletar Mesa</button>
+        </div>
+    </div>
+    <form id="novamesa" method="get" action="/mesas/novamesa">
+    </form>
+    <button acttype="button" form="novamesa" class="btn btn-primary btn-lg float-right">Nova mesa</button>
+
+</div>
+</body>
+</html>
