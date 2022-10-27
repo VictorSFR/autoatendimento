@@ -16,13 +16,17 @@
     }
 
     </style>
+    <div class="logo-container mb-3 p-3 d-flex justify-content-between">
+        <span class="logo">Cardapyo</span>
+        <span class="mt-3">
+        <a  class="text-light" sec:authorize="isAuthenticated()" href="/logout">logout</a>
+
+    </span>
+    </div>
     <title>Listagem pratos</title>
 </head>
 <body>
-<div class="logo-container mb-3 p-3 d-flex justify-content-between">
-    <span class="logo">Cardapyo</span>
-    <span class="mt-3">login</span>
-</div>
+
 <div class="container">
 
     <div class="row">
