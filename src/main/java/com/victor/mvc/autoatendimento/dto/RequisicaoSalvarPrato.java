@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class RequisicaoSalvarPrato {
     @NotBlank
@@ -76,6 +77,7 @@ public class RequisicaoSalvarPrato {
     }
 
     private Path toFile(MultipartFile file) {
+
         Path newFile = Paths.get(file.getOriginalFilename());
         try (InputStream is = file.getInputStream();
              OutputStream os = Files.newOutputStream(newFile)) {

@@ -16,15 +16,27 @@
     }
 
     </style>
+    <div class="logo-container mb-3 p-3 d-flex justify-content-between">
+        <span class="logo">Cardapyo</span>
+        <span class="mt-3">
+        <a  class="text-light" sec:authorize="isAuthenticated()" href="/logout">logout</a>
+
+    </span>
+    </div>
     <title>Listagem Mesas</title>
 </head>
 <body>
-<div class="logo-container mb-3 p-3 d-flex justify-content-between">
-    <span class="logo">Cardapyo</span>
-    <span class="mt-3">login</span>
-</div>
-<div class="container">
 
+<div class="container">
+    <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+        <div class="navbar-nav">
+            <a  class="nav-item nav-link" th:href="@{/pratos/listagem}">Pratos</a>
+            <a th:classappend="'active'" class="nav-item nav-link" th:href="@{/mesas/listagem}">Mesas</a>
+            <a  class="nav-item nav-link" th:href="@{/pedidos/pedidosatuais}">Pedidos</a>
+            <a  class="nav-item nav-link" th:href="@{/pedidos/listagem}">Histórico de Pedidos</a>
+        </div>
+        <a href="/mesas/novamesa"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo Código</button></a>
+    </nav>
     <div class="row">
         <div th:each="mesa : ${listaMesas}" id="mesa" class="card mb-3" style="width: 18rem;">
 
@@ -43,9 +55,7 @@
             <button th:form="'deletar' + ${mesa.id}" type="submit" class="btn btn-danger">Deletar Mesa</button>
         </div>
     </div>
-    <form id="novamesa" method="get" action="/mesas/novamesa">
-    </form>
-    <button acttype="button" form="novamesa" class="btn btn-primary btn-lg float-right">Nova mesa</button>
+
 
 </div>
 </body>

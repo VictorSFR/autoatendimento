@@ -3,6 +3,7 @@ package com.victor.mvc.autoatendimento.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,8 +28,9 @@ public class WebSecurityConfig {
     private DataSource dataSource;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests().anyRequest().authenticated()
-                .and().formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/pratos/listagem",true));
+        http.authorizeHttpRequests().antMatchers("/cardapio/{^[a-z]{0,10}$}").permitAll().anyRequest().authenticated()
+                .and().formLogin(form -> form.loginPage("/login").permitAll().defaultSuccessUrl("/pratos/listagem",true))
+                ;
 
         return http.csrf().disable().build();
     }

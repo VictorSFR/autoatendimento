@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface MesaRepository extends JpaRepository<Mesa, Long> {
     List<Mesa> findAll();
+    Mesa findByCode(String code);
 
 }

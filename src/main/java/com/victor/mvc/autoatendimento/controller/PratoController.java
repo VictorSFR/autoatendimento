@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 @Transactional
@@ -37,7 +35,6 @@ public class PratoController {
 
         return "prato/listagempratos";
     }
-    //TODO refatorar método, deletar por ID
     @PostMapping("editar")
     public String editarPrato(RequisicaoEditarPrato requisicaoEditarPrato, Model model){
         System.out.println("Recebi uma requisição para editar um prato.");
@@ -80,8 +77,11 @@ public class PratoController {
 
 
         Prato prato = requisicaoSalvarPrato.toPrato();
+        if (prato.getImagem()!=null){
+            pratoRepository.save(prato);
+            System.out.println("Prato salvo");
+        }
 
-        pratoRepository.save(prato);
         return "redirect:/pratos/listagem";
     }
 
