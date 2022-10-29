@@ -35,7 +35,9 @@ public class PratoController {
 
     @PostMapping("editar")
     public String editarPrato(RequisicaoEditarPrato requisicaoEditarPrato, Model model) {
-
+        Optional<Prato> pratoOpt = pratoRepository.findById(requisicaoEditarPrato.getId());
+        requisicaoEditarPrato = new RequisicaoEditarPrato(pratoOpt.get());
+        model.addAttribute("requisicaoEditarPrato",requisicaoEditarPrato);
         return "prato/editarprato";
     }
 

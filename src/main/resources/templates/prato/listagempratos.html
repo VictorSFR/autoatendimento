@@ -70,10 +70,6 @@
             <form th:id="'editar' + ${prato.id}" method="post" action="/pratos/editar"
                   th:object="${RequisicaoEditarPrato}">
                 <input type="hidden" name="id" th:value="${prato.id}">
-                <input type="hidden" name="nomePrato" th:value="${prato.nomePrato}">
-                <input type="hidden" name="valorPrato" th:value="${prato.valor}">
-                <input type="hidden" name="descricaoPrato" th:value="${prato.descricao}">
-                <input type="hidden" name="imagemPrato" th:value="${prato.imagem}">
             </form>
             <button th:form="'editar' + ${prato.id}" type="submit" class="btn btn-primary">Editar Prato</button>
             <form th:id="'deletar' + ${prato.id}" method="post" action="/pratos/deletar"

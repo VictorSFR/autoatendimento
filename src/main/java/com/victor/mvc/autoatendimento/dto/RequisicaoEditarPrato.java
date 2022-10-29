@@ -1,6 +1,10 @@
 package com.victor.mvc.autoatendimento.dto;
 
 
+import com.victor.mvc.autoatendimento.model.Prato;
+
+import java.util.Base64;
+
 public class RequisicaoEditarPrato {
 
     private Long id;
@@ -13,12 +17,19 @@ public class RequisicaoEditarPrato {
     //TODO Realizar bean validation imagem prato
     private String imagemPrato;
 
-    public RequisicaoEditarPrato(Long id, String nomePrato, String valorPrato, String descricaoPrato, String imagemPrato) {
-        this.id = id;
-        this.nomePrato = nomePrato;
-        this.valorPrato = valorPrato;
-        this.descricaoPrato = descricaoPrato;
-        this.imagemPrato = imagemPrato;
+    public RequisicaoEditarPrato() {
+    }
+
+    public RequisicaoEditarPrato(Prato prato){
+        this.id = prato.getId();
+        this.nomePrato = prato.getNomePrato();
+        this.valorPrato = prato.getValor().toString();
+        this.descricaoPrato = prato.getDescricao();
+        this.imagemPrato = converter(prato.getImagem());
+    }
+    public String converter(byte[] byteStream) {
+
+        return "data:image/png;base64," + Base64.getEncoder().encodeToString(byteStream);
     }
 
     public Long getId() {
