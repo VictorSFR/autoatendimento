@@ -45,7 +45,11 @@ public class WebSecurityConfig {
     }
     @Bean
     public UserDetailsManager users(DataSource dataSource) {
-
+        UserDetails user = User.builder()
+                .username("jaum")
+                .password(passwordEncoder().encode("jaum"))
+                .roles("USER")
+                .build();
         JdbcUserDetailsManager users = new JdbcUserDetailsManager(dataSource);
         return users;
     }

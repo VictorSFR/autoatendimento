@@ -9,12 +9,11 @@ import javax.validation.Constraint;
 @Table(name = "users")
 public class User {
     @Id
-    @ManyToOne
-    @JoinColumn(name = "username",columnDefinition="varchar(50)")
-    private Authority authority;
+    @Column(columnDefinition="varchar(50)")
+    private String username;
     @Column(columnDefinition="varchar(200)")
     private String password;
-
+    @Column(columnDefinition="tinyint(1)")
     private boolean enabled;
 
 
