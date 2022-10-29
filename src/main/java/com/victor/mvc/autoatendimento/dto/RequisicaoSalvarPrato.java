@@ -11,9 +11,9 @@ import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class RequisicaoSalvarPrato {
+    private Long id;
     @NotBlank
     private String nomePrato;
     @NotBlank
@@ -34,6 +34,14 @@ public class RequisicaoSalvarPrato {
 
     public String getValorPrato() {
         return valorPrato;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setValorPrato(String valorPrato) {

@@ -5,14 +5,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PratoRepository extends JpaRepository<Prato, Long> {
 
-     List<Prato> findAll();
+    List<Prato> findAll();
 
-     Prato findByNomePrato(String nomePrato);
-     Prato deleteByNomePrato(String nomePrato);
-     Prato deleteById(long id);
+    Optional<Prato> findById(Long id);
+
+    Prato findByNomePrato(String nomePrato);
+
+    Prato deleteByNomePrato(String nomePrato);
+
+    Prato deleteById(long id);
 
 }

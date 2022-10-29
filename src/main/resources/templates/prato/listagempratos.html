@@ -26,11 +26,12 @@
     }
 }
 
+
     </style>
     <div class="logo-container mb-3 p-3 d-flex justify-content-between">
         <span class="logo">Cardapyo</span>
         <span class="mt-3">
-        <a  class="text-light" sec:authorize="isAuthenticated()" href="/logout">logout</a>
+        <a class="text-light" sec:authorize="isAuthenticated()" href="/logout">logout</a>
 
     </span>
     </div>
@@ -42,11 +43,13 @@
     <nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
         <div class="navbar-nav">
             <a th:classappend="'active'" class="nav-item nav-link" th:href="@{/pratos/listagem}">Pratos</a>
-            <a  class="nav-item nav-link" th:href="@{/mesas/listagem}">Mesas</a>
-            <a  class="nav-item nav-link" th:href="@{/pedidos/pedidosatuais}">Pedidos</a>
-            <a  class="nav-item nav-link" th:href="@{/pedidos/listagem}">Histórico de Pedidos</a>
+            <a class="nav-item nav-link" th:href="@{/mesas/listagem}">Mesas</a>
+            <a class="nav-item nav-link" th:href="@{/pedidos/pedidosatuais}">Pedidos</a>
+            <a class="nav-item nav-link" th:href="@{/pedidos/listagem}">Histórico de Pedidos</a>
         </div>
-        <a href="/pratos/novoprato"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo prato</button></a>
+        <a href="/pratos/novoprato">
+            <button class="btn btn-outline-secondary my-2 my-sm-0">Novo prato</button>
+        </a>
     </nav>
     <div class="row">
         <div th:each="prato : ${listaPratosDTOAdm}" id="prato" class="card mb-3" style="width: 18rem;">
@@ -58,20 +61,24 @@
                     and make up the bulk of the card's content.</p>
             </div>
             <ul id="infopreco" class="list-group list-group-flush">
-                <li class="list-group-item " th:text="'R$ ' + ${#numbers.formatDecimal(prato.valor, 0, 'COMMA', 2, 'COMMA')}">Cras justo odio</li>
+                <li class="list-group-item "
+                    th:text="'R$ ' + ${#numbers.formatDecimal(prato.valor, 0, 'COMMA', 2, 'COMMA')}">Cras justo odio
+                </li>
 
             </ul>
 
-            <form th:id="'editar' + ${prato.id}" method="post" action="/pratos/editar" th:object="${RequisicaoEditarPrato}">
-                <input type="hidden"  name="id" th:value="${prato.id}">
-                <input type="hidden"  name="nomePrato" th:value="${prato.nomePrato}">
-                <input type="hidden"  name="valorPrato" th:value="${prato.valor}">
-                <input type="hidden"  name="descricaoPrato" th:value="${prato.descricao}">
-                <input type="hidden"  name="imagemPrato" th:value="${prato.imagem}">
+            <form th:id="'editar' + ${prato.id}" method="post" action="/pratos/editar"
+                  th:object="${RequisicaoEditarPrato}">
+                <input type="hidden" name="id" th:value="${prato.id}">
+                <input type="hidden" name="nomePrato" th:value="${prato.nomePrato}">
+                <input type="hidden" name="valorPrato" th:value="${prato.valor}">
+                <input type="hidden" name="descricaoPrato" th:value="${prato.descricao}">
+                <input type="hidden" name="imagemPrato" th:value="${prato.imagem}">
             </form>
             <button th:form="'editar' + ${prato.id}" type="submit" class="btn btn-primary">Editar Prato</button>
-            <form th:id="'deletar' + ${prato.id}" method="post" action="/pratos/deletar" th:object="${RequisicaoDeletarPrato}">
-                <input type="hidden"  name="id" th:value="${prato.id}">
+            <form th:id="'deletar' + ${prato.id}" method="post" action="/pratos/deletar"
+                  th:object="${RequisicaoDeletarPrato}">
+                <input type="hidden" name="id" th:value="${prato.id}">
             </form>
             <button th:form="'deletar' + ${prato.id}" type="submit" class="btn btn-danger">Deletar Prato</button>
         </div>

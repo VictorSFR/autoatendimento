@@ -1,8 +1,5 @@
 package com.victor.mvc.autoatendimento.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotBlank;
 
 public class RequisicaoEditarPrato {
 

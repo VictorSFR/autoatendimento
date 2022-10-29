@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "authorities")
 public class Authority {
     @Id
-    @Column(columnDefinition="varchar(50)")
+    @Column(columnDefinition = "varchar(50)")
     private String authority;
 
     @ManyToOne

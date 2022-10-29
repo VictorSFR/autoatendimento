@@ -15,11 +15,12 @@
         font-size: 2.5rem;
     }
 
+
     </style>
     <div class="logo-container mb-3 p-3 d-flex justify-content-between">
         <span class="logo">Cardapyo</span>
         <span class="mt-3">
-        <a  class="text-light" sec:authorize="isAuthenticated()" href="/logout">logout</a>
+        <a class="text-light" sec:authorize="isAuthenticated()" href="/logout">logout</a>
 
     </span>
     </div>
@@ -32,8 +33,10 @@
         <h1 class="display-4">Editar Prato</h1>
     </div>
     <div class="card mt-3">
+
         <form th:object="${requisicaoEditarPrato}" class="card-body" action="/pratos/editarprato" method="post"
               enctype="multipart/form-data">
+            <input type="hidden" name="id" th:value="*{id}">
             <div class="form-group">
                 <label for="nomePrato">Nome do prato</label>
                 <input th:errorclass="is-invalid" th:field="*{nomePrato}" class="form-control"

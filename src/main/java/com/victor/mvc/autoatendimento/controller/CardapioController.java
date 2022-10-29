@@ -21,13 +21,14 @@ public class CardapioController {
     PratoRepository pratoRepository;
     @Autowired
     MesaRepository mesaRepository;
+
     @GetMapping(value = "/{code}")
     public String cardapio(@PathVariable String code) {
         System.out.println("Recebi uma requisição para mostrar cardapio");
         System.out.println(code);
 
         Mesa mesa = mesaRepository.findByCode(code);
-        if(mesa != null){
+        if (mesa != null) {
             return "redirect:/cardapio/ver";
         }
         /*List<Prato> listaPratos = pratoRepository.findAll();
@@ -39,8 +40,9 @@ public class CardapioController {
         return "";
 
     }
+
     @GetMapping(value = "ver")
-    public String mostrarCardapio(Model model){
+    public String mostrarCardapio(Model model) {
         List<Prato> listaPratos = pratoRepository.findAll();
 
         List<PratoDtoClient> listaPratosDTO = PratoDtoClient.retornaListaDTO(listaPratos);
