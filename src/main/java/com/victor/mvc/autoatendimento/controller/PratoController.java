@@ -48,11 +48,14 @@ public class PratoController {
 
         Optional<Prato> pratoOpt = pratoRepository.findById(requisicaoSalvarPratoPrato.getId());
         Prato pratoDb = pratoOpt.get();
-        pratoDb.setNomePrato(pratoRecebido.getNomePrato());
-        pratoDb.setDescricao(pratoRecebido.getDescricao());
-        pratoDb.setValor(pratoRecebido.getValor());
-        pratoDb.setImagem(pratoRecebido.getImagem());
-        pratoRepository.save(pratoDb);
+        if (pratoRecebido.getImagem()!=null){
+            pratoDb.setNomePrato(pratoRecebido.getNomePrato());
+            pratoDb.setDescricao(pratoRecebido.getDescricao());
+            pratoDb.setValor(pratoRecebido.getValor());
+            pratoDb.setImagem(pratoRecebido.getImagem());
+        }
+
+
 
         return "redirect:/pratos/listagem";
     }
