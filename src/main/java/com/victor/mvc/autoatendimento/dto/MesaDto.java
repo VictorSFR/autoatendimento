@@ -17,7 +17,7 @@ public class MesaDto {
     public MesaDto(Mesa mesa) {
         this.id = mesa.getId();
         try {
-            this.qrcode = geraImagemQRCode("http://192.168.101.105:8080/cardapio/" + mesa.getCode());
+            this.qrcode = geraImagemQRCode("http://192.168.101.100:8080/cardapio/" + mesa.getCode());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

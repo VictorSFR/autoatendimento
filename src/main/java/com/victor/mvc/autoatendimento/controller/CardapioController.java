@@ -1,22 +1,30 @@
 package com.victor.mvc.autoatendimento.controller;
 
+import com.victor.mvc.autoatendimento.dto.PratoDtoAdm;
+import com.victor.mvc.autoatendimento.dto.RequisicaoNovoPedido;
 import com.victor.mvc.autoatendimento.model.Mesa;
 import com.victor.mvc.autoatendimento.model.Prato;
 import com.victor.mvc.autoatendimento.repository.MesaRepository;
 import com.victor.mvc.autoatendimento.repository.PratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 import com.victor.mvc.autoatendimento.dto.PratoDtoClient;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.http.MediaType.*;
 
 @Controller
 @RequestMapping("/cardapio")
 public class CardapioController {
+    //lista de itens do pedido
+    private ArrayList<PratoDtoAdm> listaPratosPedido;
     @Autowired
     PratoRepository pratoRepository;
     @Autowired
@@ -44,20 +52,29 @@ public class CardapioController {
     @GetMapping(value = "ver")
     public String mostrarCardapio(Model model) {
         List<Prato> listaPratos = pratoRepository.findAll();
-
-        List<PratoDtoClient> listaPratosDTO = PratoDtoClient.retornaListaDTO(listaPratos);
+        List<PratoDtoAdm> listaPratosDTO = PratoDtoAdm.retornaListaDTO(listaPratos);
         model.addAttribute("listaPratosDTO", listaPratosDTO);
+
+        this.listaPratosPedido = new ArrayList<PratoDtoAdm>(listaPratosDTO);
         System.out.println("Recuperei lista de pratos.");
-        return "";
+        return "cardapio";
     }
 
 
-    @GetMapping(value = "/cardapio/novopedido")
-    public String novoPedido(String nomePrato, Model model) {
-        Prato prato = pratoRepository.findByNomePrato(nomePrato);
-        PratoDtoClient pratoDtoClient = new PratoDtoClient(prato);
-        model.addAttribute("prato", pratoDtoClient);
+    @PostMapping (value = "novopedido", consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    public String novoPedido(RequisicaoNovoPedido requisicaoNovoPedido, Model model) {
+        System.out.println("RODEEEEEI");
 
-        return "cardapio/novopedido";
+
+
+        System.out.println("Lista no controller");
+        this.listaPratosPedido.forEach(pratoDtoAdm -> System.out.println(pratoDtoAdm.getId()));
+
+        System.out.println(requisicaoNovoPedido.getListaID());
+        this.listaPratosPedido.removeIf(i -> (!requisicaoNovoPedido.getListaID().contains(i.getId())));
+        System.out.println("Lista após remoção");
+
+        this.listaPratosPedido.forEach(pratoDtoAdm -> System.out.println(pratoDtoAdm.getId()));
+        return "pedido/novopedido";
     }
 }

@@ -1,49 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-    .container {
-        display: flex;
-     justify-content: center;
-    }
-    #prato {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+
+    .col label.btn-default.active{background-color:#42f575;color:#FFF}
+    .card {
+        pointer-events: none
     }
 
 
 
-}
+
+
+
+
 
 
     </style>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
 
     <title>Cardapio</title>
 </head>
 <body>
 <div class="container">
+
     <div class="col">
-        <div th:each="prato : ${listaPratosDTO}" id="prato" class="card mb-3" style="width: 40rem;">
+        <form th:object=" ${requisicaoNovoPedido} " action="/cardapio/novopedido" method="post"
+              enctype="application/x-www-form-urlencoded">
 
-            <a th:href="@{'/cardapio/novopedido'(nomePrato=${prato.nomePrato})}">
+            <div th:each="prato : ${listaPratosDTO}" data-toggle="buttons" class="btn-group bizmoduleselect">
+                <label class="btn btn-default" name="labelPrato">
 
-                <img class="card-img-top" th:src="${prato.imagem}" alt="Card image cap">
-                <div class="card-body">
+
+                    <img style="max-width:450px;
+    max-height:450px;" class="card-img-top" th:src="${prato.imagem}" alt="Card image cap">
                     <h5 class="card-title" th:text="${prato.nomePrato}">Card title</h5>
-                    <p class="card-text" th:text="${prato.descricao}">Some quick example text to build on the card title
-                        and make up the bulk of the card's content.</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:text="${prato.valor}">Cras justo odio</li>
-                </ul>
 
-            </a>
-        </div>
+                    <p class="card-text" th:text="${prato.descricao}">Some quick example text </p>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" th:text="${prato.valor}">Cras justo odio</li>
+                    </ul>
+
+
+                    <input type="checkbox" name="pratos" th:value="${prato.id}"/>
+
+                </label>
+            </div>
+            <button class="btn btn-primary" type="submit">Criar pedido</button>
+        </form>
+
+
     </div>
 </div>
+
+
 </body>
+<script>
+    window.addEventListener('load', function () {
+        var checkboxes = document.getElementsByName("pratos")
+        var labelPratos = document.getElementsByName("labelPrato")
+
+        checkboxes.forEach((i,index) => {if (i.checked) {
+            labelPratos[index].classList.add("active")
+        }else {
+            labelPratos[index].classList.remove('active')
+        }
+      })
+    })
+
+
+
+
+
+
+
+
+</script>
+
 </html>
