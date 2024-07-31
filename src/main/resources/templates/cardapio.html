@@ -9,7 +9,8 @@
         pointer-events: none
     }
 
-
+    <script>
+    </>
 
 
 
@@ -18,6 +19,7 @@
 
 
     </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
@@ -36,7 +38,7 @@
 
 
                     <img style="max-width:450px;
-    max-height:450px;" class="card-img-top" th:src="${prato.imagem}" alt="Card image cap">
+                 max-height:450px;" class="card-img-top" th:src="${prato.imagem}" alt="Card image cap">
                     <h5 class="card-title" th:text="${prato.nomePrato}">Card title</h5>
 
                     <p class="card-text" th:text="${prato.descricao}">Some quick example text </p>
@@ -59,21 +61,25 @@
 
 
 </body>
-<script>
-    window.addEventListener('load', function () {
+<script defer>
+
+//GAMBIARRA TEMPORARIA
+var delayInMilliseconds = 300; //1 second
+
+setTimeout(function() {
+  console.log("Rodando")
         var checkboxes = document.getElementsByName("pratos")
         var labelPratos = document.getElementsByName("labelPrato")
 
-        checkboxes.forEach((i,index) => {if (i.checked) {
+        Array.from(checkboxes).forEach((i, index) => {
+        if (i.checked) {
+
             labelPratos[index].classList.add("active")
-        }else {
-            labelPratos[index].classList.remove('active')
+        } else {
+            labelPratos[index].classList.remove("active")
         }
-      })
     })
-
-
-
+}, delayInMilliseconds);
 
 
 
