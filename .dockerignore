@@ -1,0 +1,8 @@
+**/target/
+**/docs/
+**/view/
+**/.git/
+**/README.MD
+**/CITATION.cff
+**/LICENSE
+**/.vscode
